@@ -1,38 +1,47 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-
+<link href="https://fonts.googleapis.com/css?family=Cantarell&display=swap" rel="stylesheet">
 <dom-module id="registro-jugador"> 
 
     <template>
+
     <div class="botones">
-       <br> Nombre:<input class="input-nombre" type=text id="nombre" value="{{nombre::input}}">
-       <br> Apellido:<input class="input-apellido" type=text id="apellido" value="{{apellido::input}}">
-       <br> Edad:<input class="input-edad"type=text id="edad" value="{{edad::input}}">
-       <br> Altura:<input class="input-altura"type=text id="altura" placeholder="0.00"  value="{{altura::input}}">
-       <br> Peso:<input type=text  class="input-peso" id="peso" placeholder="00.00" value="{{peso::input}}">
-    </div>
-       <br><select id="posicion" value="{{posicion::input}}">
-        <br><option selected> Seleccione Posicion</option>
+        <h1 class="lb-titulo">Datos del Jugador</h1>
+        <label class="lb-nombre">Nombre:</label><input class="input-nombre" type=text id="nombre" value="{{nombre::input}}">
+       <label class="lb-apellido">Apellido:</label><input class="input-apellido" type=text id="apellido" value="{{apellido::input}}">
+       <br> <label class="lb-edad">Edad:</label><input class="input-edad"type=text id="edad" value="{{edad::input}}">
+       <br> <label class="lb-altura">Altura:</label class="lb-altura"><input class="input-altura"type=text id="altura" placeholder="0.00"  value="{{altura::input}}">
+       <br> <label class="lb-peso">Peso:</label><input type=text  class="input-peso" id="peso" placeholder="00.00" value="{{peso::input}}">
+    
+       <br><label class="lb-posicion">Posición:</label><select id="posicion" value="{{posicion::input}}">
+        <br><option selected> Seleccionar</option>
             <option value="base"> Base</option>
             <option value="ayuda base" >Ayuda Base</option>
             <option value="ala"> Ala</option>
             <option value="ala pivot">Ala Pivot</option>
             <option value="pivot">Pivot</option>
        </select>
-     
-       <br><br> <button on-click="registrarJugador">Cargar Datos del Jugador</button>
-   
-       <br><br> <button on-click="mostrar">cargar por posicion</button>
-       <br>
-       <br>
-       <select>
+       
+       <br> <button class="btn-registrar" on-click="registrarJugador">Cargar Datos </button>
+       <br> <button class="btn-mostrar" on-click="mostrar">Cargar Datos para Calificaciones</button>
+    </div>
+       
+     <div class="segundo-div">
+       
+        <button class="btn-mostrar" on-click="mostrarJson">mostrar</button>
+             
+
+    </div> 
+    <div class="tercer-div">
+    
+           
        <template is="dom-repeat" id="lista" items={{seleccionBase}} as="item">
-        <option value="{{item.nombre}}"> <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}} </option> 
+      <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="seleccion" id="{{item.nombre}}" value={{calificacion::input}}>
         </template>
-       </select>
-       Calificación:<input type="number" placeholder="000" value={{calificacion::input}}>
-        <button on-click=calificacionesBase({{item.nombre}},calificacion)]]>Cargar Calificaciones</button>
-    
-    
+      
+       
+        <button on-click="cargarCalificacion">Cargar Calificaciones</button>
+    </div>
+
         <style>
     
             .panel-registro{
@@ -44,21 +53,70 @@
         
             }
 
-            .input-nombre, .input-edad, .input-altura, .input-peso, .input-apellido{
-                border: solid 1px #ccc; 
-                padding: 10px;
-                font-size: 12px;
-                width: 300px;
+        .input-nombre, .input-edad, .input-altura, .input-peso, .input-apellido, .input-cat{
+         border: solid 1px #ccc; 
+         padding: 10px;
+         font-size: 15px;
+         font-family: 'Cantarell', sans-serif;
         margin: 0 auto;
-        padding: 10px;
-        color:#999;
-        border-radius: 10px;
-        padding-left: 10px;
+        color:black;
+        border-radius: 10px; 
+        margin-bottom:20px; 
+        width:100%;
+     
             }
 
-            .input-nombre:focus{
-                border-color:#18A383;
-                border-radius: 10px;
+            #posicion{
+                border: solid 1px #ccc; 
+         padding: 10px;
+         font-size: 15px;
+         font-family: 'Cantarell', sans-serif;
+        margin: 0 auto;
+        color:black;
+        border-radius: 10px; 
+        margin-bottom:20px; 
+        width:105%;
+     
+            }
+
+        .btn-registrar, .btn-mostrar{
+        padding:10px;
+        border: solid 1px #ccc; 
+        margin-bottom:10px;
+        margin-top: -60px;
+        width:105%;
+        border-radius: 10px; 
+        font-family: 'Cantarell', sans-serif;
+            }
+
+            .lb-nombre, .lb-apellido, .lb-edad, .lb-peso, .lb-altura, .lb-posicion{
+            padding:20px;
+            margin-top: -24px;
+            color: aliceblue;
+            font-size: 20px;
+            font-family: 'Cantarell', sans-serif;
+            }
+
+             .lb-titulo{
+                   padding:20px;
+            margin-top: -40px;
+            color: aliceblue;
+            font-size: 35px;
+            font-family: 'Cantarell', sans-serif;
+            text-align: center;
+            margin-bottom:1px;
+            }
+
+
+            .botones, .segundo-div{
+                width: 500px;
+             margin:auto;
+            margin-top: 20px;
+             padding:20px;
+            box-shadow: 1 1 20px 1px rgba(1,4,5,0.4);
+            position:relative; 
+            font-family: 'Cantarell', sans-serif;
+
             }
             </style>
         
@@ -84,7 +142,8 @@ class RegistroJugador extends Polymer.Element{
                             edad:Number,
                             altura:Number,
                             peso:Number,
-                            posicion:String, value:'base'
+                            posicion:String,
+                            calificacion:Number
                         }
                       }
                 },
@@ -156,7 +215,8 @@ registrarJugador(){
         edad:this.edad,
         altura:this.altura,
         peso:this.peso,
-        posicion:this.posicion
+        posicion:this.posicion,
+        calificacion:0
     }
 
 if(this.jugadorCargado.length<5){
@@ -176,14 +236,16 @@ mostrar(){
         edad:this.edad,
         altura:this.altura,
         peso:this.peso,
-        posicion:this.posicion
+        posicion:this.posicion,
+        calificacion:this.calificacion
     }
 
     if(this.seleccionBase<5){
         this.jugadorCargado.forEach(element => {
             if(element.posicion=='base'){
                 this.push('seleccionBase', element);
-            }
+
+                            }
         });
       
     }
@@ -231,23 +293,35 @@ console.log(this.seleccionBase);
     console.log(this.seleccionPivot);
 }
 
-
-    calificaciones(nombre, calif){
-        
-      this.calificacionesBase.forEach(element=>{
-        if(element.nombre==this.nombre){
-            this.push('calificacionesBase',calificacion)
-        }
-
-      });
-       
-            
-        
-
-        console.log(this.calificacionesBase)
-        }
     
-}
+
+
+    mostrarJson(){
+        //guardo el arreglo en una variable transformanfdolo a json 
+
+      var listaJson= JSON.stringify(this.seleccionBase); 
+       
+        //almaceno en local storage
+       
+        localStorage.setItem("listaBase", listaJson);
+
+            console.log(listaJson);
+        }
+        
+    
+        cargarCalificacion(nombre, calificacion){
+            var listaJson= JSON.stringify(this.seleccionBase);
+            localStorage.setItem("listaBase", listaJson);
+            let nuevo=JSON.parse(localStorage.getItem("listaBase"));
+
+            let referenciaInput= document.getElementsByName("seleccion").value;
+            console.log(referenciaInput)
+        console.log(this.calificacion)
+        }
+
+
+    }
+
 
 
 
