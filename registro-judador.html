@@ -1,0 +1,259 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="registro-jugador"> 
+
+    <template>
+    <div class="botones">
+       <br> Nombre:<input class="input-nombre" type=text id="nombre" value="{{nombre::input}}">
+       <br> Apellido:<input class="input-apellido" type=text id="apellido" value="{{apellido::input}}">
+       <br> Edad:<input class="input-edad"type=text id="edad" value="{{edad::input}}">
+       <br> Altura:<input class="input-altura"type=text id="altura" placeholder="0.00"  value="{{altura::input}}">
+       <br> Peso:<input type=text  class="input-peso" id="peso" placeholder="00.00" value="{{peso::input}}">
+    </div>
+       <br><select id="posicion" value="{{posicion::input}}">
+        <br><option selected> Seleccione Posicion</option>
+            <option value="base"> Base</option>
+            <option value="ayuda base" >Ayuda Base</option>
+            <option value="ala"> Ala</option>
+            <option value="ala pivot">Ala Pivot</option>
+            <option value="pivot">Pivot</option>
+       </select>
+     
+       <br><br> <button on-click="registrarJugador">Cargar Datos del Jugador</button>
+   
+       <br><br> <button on-click="mostrar">cargar por posicion</button>
+       <br>
+       <br>
+       <select>
+       <template is="dom-repeat" id="lista" items={{seleccionBase}} as="item">
+        <option value="{{item.nombre}}"> <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}} </option> 
+        </template>
+       </select>
+       Calificación:<input type="number" placeholder="000" value={{calificacion::input}}>
+        <button on-click=calificacionesBase({{item.nombre}},calificacion)]]>Cargar Calificaciones</button>
+    
+    
+        <style>
+    
+            .panel-registro{
+        width: 300px;
+        margin: 0 auto;
+        padding: 10px;
+        color:#999;
+        border-radius: 4px;
+        
+            }
+
+            .input-nombre, .input-edad, .input-altura, .input-peso, .input-apellido{
+                border: solid 1px #ccc; 
+                padding: 10px;
+                font-size: 12px;
+                width: 300px;
+        margin: 0 auto;
+        padding: 10px;
+        color:#999;
+        border-radius: 10px;
+        padding-left: 10px;
+            }
+
+            .input-nombre:focus{
+                border-color:#18A383;
+                border-radius: 10px;
+            }
+            </style>
+        
+    </template>
+
+
+
+<script>
+
+class RegistroJugador extends Polymer.Element{
+    static get is(){
+        return 'registro-jugador';
+    }
+
+    static get properties(){
+        return {
+            jugadores:{
+            type: Object,
+                    value:()=> {
+                        return{
+                            nombre: String,
+                            apellido: String,
+                            edad:Number,
+                            altura:Number,
+                            peso:Number,
+                            posicion:String, value:'base'
+                        }
+                      }
+                },
+
+                
+            jugadorCargado:{
+                    value(){
+                        return[
+                        ];
+                    }
+                    }, 
+
+                seleccionBase:{
+                    value(){
+                        return[
+                        ];
+                    }
+                    },
+
+                    seleccionAla:{
+                    value(){
+                        return[
+                        ];
+                    }
+                    }, 
+
+                    seleccionPivot:{
+                    value(){
+                        return[
+                        ];
+                    }
+                    },
+
+                    seleccionAyudaBase:{
+                    value(){
+                        return[
+                        ];
+                    }
+                    },
+
+                    seleccionAlaPivot:{
+                    value(){
+                        return[
+                        ];
+                    }
+                    },
+
+                    calificacion:{
+                        type:Number
+                    },
+
+                    calificacionesBase:{
+                    value(){
+                        return[
+                        ];
+                    }
+                    }
+
+    };
+
+
+
+}
+
+registrarJugador(){
+    let listaAuxiliar={
+        nombre:this.nombre,
+        apellido:this.apellido,
+        edad:this.edad,
+        altura:this.altura,
+        peso:this.peso,
+        posicion:this.posicion
+    }
+
+if(this.jugadorCargado.length<5){
+this.push('jugadorCargado', listaAuxiliar); 
+alert("Jugador cargado exitosamente")
+} else{
+    alert("ha excedido el número de jugadores registrados")
+    //console.log(this.jugadorCargado);
+}
+
+}
+
+mostrar(){
+    let listaAuxiliar2={
+        nombre:this.nombre,
+        apellido:this.apellido,
+        edad:this.edad,
+        altura:this.altura,
+        peso:this.peso,
+        posicion:this.posicion
+    }
+
+    if(this.seleccionBase<5){
+        this.jugadorCargado.forEach(element => {
+            if(element.posicion=='base'){
+                this.push('seleccionBase', element);
+            }
+        });
+      
+    }
+
+console.log(this.seleccionBase);
+
+    if(this.seleccionAla<5){
+        this.jugadorCargado.forEach(element => {
+            if(element.posicion=='ala'){
+                this.push('seleccionAla', element);
+            }
+        });
+      
+    }
+    console.log(this.seleccionAla);
+
+    if(this.seleccionAlaPivot<5){
+        this.jugadorCargado.forEach(element => {
+            if(element.posicion=='ala pivot'){
+                this.push('seleccionAlaPivot', element);
+            }
+        });
+      
+    }
+    console.log(this.seleccionAlaPivot);
+
+    if(this.seleccionAyudaBase<5){
+        this.jugadorCargado.forEach(element => {
+            if(element.posicion=='ayuda base'){
+                this.push('seleccionAyudaBase', element);
+            }
+        });
+      
+    }
+    console.log(this.seleccionAyudaBase);
+
+    if(this.seleccionPivot<5){
+        this.jugadorCargado.forEach(element => {
+            if(element.posicion=='pivot'){
+                this.push('seleccionPivot', element);
+            }
+        });
+      
+    }
+    console.log(this.seleccionPivot);
+}
+
+
+    calificaciones(nombre, calif){
+        
+      this.calificacionesBase.forEach(element=>{
+        if(element.nombre==this.nombre){
+            this.push('calificacionesBase',calificacion)
+        }
+
+      });
+       
+            
+        
+
+        console.log(this.calificacionesBase)
+        }
+    
+}
+
+
+
+
+
+window.customElements.define(RegistroJugador.is, RegistroJugador);
+</script>
+
+</dom-module>
