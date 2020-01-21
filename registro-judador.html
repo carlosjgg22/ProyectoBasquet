@@ -24,38 +24,44 @@
        <br> <button class="btn-registrar" on-click="registrarJugador">Cargar Datos </button>
        <br> <button class="btn-mostrar" on-click="mostrar">Cargar Datos para Calificaciones</button>
     
-       <button class="btn-mostrar" on-click="mostrarJson">mostrar</button>
+       <button class="btn-mostrar" on-click="sortCalification">mostrar</button>
     </div>
         
 
     <div class="panel-secundario">
 <p>Lista de Jugadores por Asignar Calificacion</p>
        <template is="dom-repeat" id="lista" items={{seleccionBase}} as="item">
-      <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
+      <br> {{item.nombre}} {{item.apellido}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
         </template>
 
         <template is="dom-repeat" id="lista" items={{seleccionAla}} as="item">
-            <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="seleccion" id="{{item.id}}" value={{item.calificacion::input}}>
+            <br> {{item.nombre}} {{item.apellido}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="seleccion" id="{{item.id}}" value={{item.calificacion::input}}>
               </template>
 
             <template is="dom-repeat" id="lista" items={{seleccionPivot}} as="item">
-                <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
+                <br> {{item.nombre}} {{item.apellido}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
                   </template>
       
        
                   <template is="dom-repeat" id="lista" items={{seleccionAyudaBase}} as="item">
-                    <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
+                    <br> {{item.nombre}} {{item.apellido}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
                       </template>
 
                       <template is="dom-repeat" id="lista" items={{seleccionAlaPivot}} as="item">
-                        <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
+                        <br> {{item.nombre}} {{item.apellido}}  Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
                           </template>
           
         <button on-click="cargarCalificacion">Cargar Calificaciones</button>
 
-
-
+        <table class="tabla-jugadores">
+            <tr><th>Jugadores</th></tr>
+        <template is="dom-repeat" id="lista" items={{jugadorSeleccionado}} as="item">
+            <tr><td><br> {{item.nombre}} {{item.apellido}}  Poscición {{item.posicion}}  Calificación {{item.calificacion}}</td></tr>
+              </template>
+            </table>
 </div>
+
+
 </div>
 
 
@@ -73,6 +79,12 @@
        
             }
 
+.tabla-jugadores, .tr, .th{
+  
+  border: 1px solid black;
+
+
+}
 
 .panel-principal{
     margin: auto;
@@ -239,7 +251,7 @@ class RegistroJugador extends Polymer.Element{
                         type:Number
                     },
 
-                    calificacionesBase:{
+                    jugadorSeleccionado:{
                     value(){
                         return[
                         ];
@@ -267,7 +279,7 @@ registrarJugador(){
         calificacion:0
     }
 
-if(this.jugadorCargado.length<10){
+if(this.jugadorCargado.length<5){
 
 this.push('jugadorCargado', listaAuxiliar); 
 contadorId=contadorId+1;
@@ -313,7 +325,7 @@ mostrar(){
         console.log(this.seleccionAla);
 
         this.jugadorCargado.forEach(element => {
-            if((element.posicion=='ala pivot')&&(this.seleccionAlaPivot<5)){
+            if((element.posicion=='ala pivot')&&(this.seleccionAlaPivot.length<5)){
                 this.push('seleccionAlaPivot', element);
             }
         });
@@ -322,7 +334,7 @@ mostrar(){
     console.log(this.seleccionAlaPivot);
 
         this.jugadorCargado.forEach(element => {
-            if((element.posicion=='ayuda base')&&(this.seleccionAyudaBase<5)){
+            if((element.posicion=='ayuda base')&&(this.seleccionAyudaBase.length<5)){
                 this.push('seleccionAyudaBase', element);
             }
         });
@@ -332,7 +344,7 @@ mostrar(){
 
    
         this.jugadorCargado.forEach(element => {
-            if((element.posicion=='pivot')&&(this.seleccionPivot<5)){
+            if((element.posicion=='pivot')&&(this.seleccionPivot.length<5)){
                 this.push('seleccionPivot', element);
             }
         });
@@ -368,23 +380,72 @@ mostrar(){
             var listaJson= JSON.stringify(this.seleccionBase);
             localStorage.setItem("listaBase", listaJson);
             
-            console.log(this.seleccionBase);
-
+alert('Las Calificaciones han sido cargadas')
            // let referenciaInput= document.getElementsByName("seleccion").value;
             //console.log(referenciaInput)
         //console.log(this.calificacion)
-       
-   
-
-console.log(this.calificacion);
+    
        
         }
 
+        sortCalification(){
+
+            //seleccionar la notas de la categoria base
+            this.seleccionBase.sort(function(a,b){
+                return b.calificacion-a.calificacion;
+            });
+
+           
+           for(var i=0;i<this.seleccionBase.length-2;i++){
+               this.push('jugadorSeleccionado',this.seleccionBase[i]);
+           }
+
+           //seleccionar las notas de la categoria Pivot
+
+        this.seleccionPivot.sort(function(a,b){
+                return b.calificacion-a.calificacion;
+            });
+
+           
+           for(var i=0;i<this.seleccionPivot.length-2;i++){
+               this.push('jugadorSeleccionado',this.seleccionPivot[i]);
+           }
+
+           //seleccionar las notas de la categoria Ala
+
+           this.seleccionAla.sort(function(a,b){
+                return b.calificacion-a.calificacion;
+            });
+
+           
+           for(var i=0;i<this.seleccionAla.length-2;i++){
+               this.push('jugadorSeleccionado',this.seleccionAla[i]);
+           }
+           
+           //seleccionar las notas de la categoria ayudabase
+           this.seleccionAyudaBase.sort(function(a,b){
+                return b.calificacion-a.calificacion;
+            });
+
+           
+           for(var i=0;i<this.seleccionAyudaBase.length-2;i++){
+               this.push('jugadorSeleccionado',this.seleccionAyudaBase[i]);
+           }
+
+        //seleccionar las notas de la categoria ala pivot 
         
-        toggleSelection(e) {
-        var item = this.$.seleccionBase.itemForElement(e.target);
-        this.$.selector.select(item);
-      }
+        this.seleccionAlaPivot.sort(function(a,b){
+                return b.calificacion-a.calificacion;
+            });
+
+           
+           for(var i=0;i<this.seleccionAlaPivot.length-2;i++){
+               this.push('jugadorSeleccionado',this.seleccionAlaPivot[i]);
+           }
+
+           console.log(this.jugadorSeleccionado)
+        }
+
 
 
     }
