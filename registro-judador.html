@@ -14,51 +14,177 @@
     
        <br><label class="lb-posicion">Posición:</label><select id="posicion" value="{{posicion::input}}">
         <br><option selected> Seleccionar</option>
-            <option value="base"> Base</option>
-            <option value="ayuda base" >Ayuda Base</option>
-            <option value="ala"> Ala</option>
-            <option value="ala pivot">Ala Pivot</option>
-            <option value="pivot">Pivot</option>
+            <option value="Base"> Base</option>
+            <option value="Ayuda Base" >Ayuda Base</option>
+            <option value="Ala"> Ala</option>
+            <option value="Ala Pivot">Ala Pivot</option>
+            <option value="Pivot">Pivot</option>
        </select>
        
        <br> <button class="btn-registrar" on-click="registrarJugador">Cargar Datos </button>
        <br> <button class="btn-mostrar" on-click="mostrar">Cargar Datos para Calificaciones</button>
     
-       <button class="btn-mostrar" on-click="sortCalification">mostrar</button>
+       <button class="btn-mostrar" on-click="sortCalification">Seleccionar Jugadores</button>
     </div>
         
 
     <div class="panel-secundario">
-<p>Lista de Jugadores por Asignar Calificacion</p>
+<table class="tabla-base">
+    <thead>
+        Jugadores a Calificar por Posición Base
+    </thead>
+    
+    <tr>
+        <th class="th-nombre">Nombre</th>
+        <th class="th-apellido">Apellido</th>
+        <th class="th-posicion">Posición</th>
+        <th class="th-cali">Calificación</th>
+    </tr>
+
        <template is="dom-repeat" id="lista" items={{seleccionBase}} as="item">
-      <br> {{item.nombre}} {{item.apellido}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
+        <tr>
+        <td class="td-nombre">{{item.nombre}}</td>
+        <td class="td-apellido">{{item.apellido}}</td>
+        <td class="td-posicion">{{item.posicion}}</td>
+        <td class="td-cali"> <input class="input-cali" type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}></td>
+        </tr>
         </template>
+    </table>
 
-        <template is="dom-repeat" id="lista" items={{seleccionAla}} as="item">
-            <br> {{item.nombre}} {{item.apellido}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="seleccion" id="{{item.id}}" value={{item.calificacion::input}}>
-              </template>
 
-            <template is="dom-repeat" id="lista" items={{seleccionPivot}} as="item">
-                <br> {{item.nombre}} {{item.apellido}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
-                  </template>
-      
-       
-                  <template is="dom-repeat" id="lista" items={{seleccionAyudaBase}} as="item">
-                    <br> {{item.nombre}} {{item.apellido}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
-                      </template>
+    <table class="tabla-ala">
+        <thead>
+            Jugadores a Calificar por Posición Ala
+        </thead>
+        
+        <tr>
+            <th class="th-nombre">Nombre</th>
+            <th class="th-apellido">Apellido</th>
+            <th class="th-posicion">Posición</th>
+            <th class="th-cali">Calificación</th>
+        </tr>
+    
+           <template is="dom-repeat" id="lista" items={{seleccionAla}} as="item">
+            <tr>
+            <td class="td-nombre">{{item.nombre}}</td>
+            <td class="td-apellido">{{item.apellido}}</td>
+            <td class="td-posicion">{{item.posicion}}</td>
+            <td class="td-cali"> <input class="input-cali" type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}></td>
+            </tr>
+            </template>
+        </table>
+    
 
-                      <template is="dom-repeat" id="lista" items={{seleccionAlaPivot}} as="item">
-                        <br> {{item.nombre}} {{item.apellido}}  Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
-                          </template>
-          
-        <button on-click="cargarCalificacion">Cargar Calificaciones</button>
-
-        <table class="tabla-jugadores">
-            <tr><th>Jugadores</th></tr>
-        <template is="dom-repeat" id="lista" items={{jugadorSeleccionado}} as="item">
-            <tr><td><br> {{item.nombre}} {{item.apellido}}  Poscición {{item.posicion}}  Calificación {{item.calificacion}}</td></tr>
-              </template>
+        <table class="tabla-pivot">
+            <thead>
+                Jugadores a Calificar por Posición Pivot
+            </thead>
+            
+            <tr>
+                <th class="th-nombre">Nombre</th>
+                <th class="th-apellido">Apellido</th>
+                <th class="th-posicion">Posición</th>
+                <th class="th-cali">Calificación</th>
+            </tr>
+        
+               <template is="dom-repeat" id="lista" items={{seleccionPivot}} as="item">
+                <tr>
+                <td class="td-nombre">{{item.nombre}}</td>
+                <td class="td-apellido">{{item.apellido}}</td>
+                <td class="td-posicion">{{item.posicion}}</td>
+                <td class="td-cali"> <input class="input-cali" type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}></td>
+                </tr>
+                </template>
             </table>
+        
+        
+            <table class="tabla-ayudabase">
+                <thead>
+                    Jugadores a Calificar por Posición Ayuda Base
+                </thead>
+                
+                <tr>
+                    <th class="th-nombre">Nombre</th>
+                    <th class="th-apellido">Apellido</th>
+                    <th class="th-posicion">Posición</th>
+                    <th class="th-cali">Calificación</th>
+                </tr>
+            
+                   <template is="dom-repeat" id="lista" items={{seleccionAyudaBase}} as="item">
+                    <tr>
+                    <td class="td-nombre">{{item.nombre}}</td>
+                    <td class="td-apellido">{{item.apellido}}</td>
+                    <td class="td-posicion">{{item.posicion}}</td>
+                    <td class="td-cali"> <input class="input-cali" type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}></td>
+                    </tr>
+                    </template>
+                </table>
+            
+      
+                <table class="tabla-ayudabase">
+                    <thead>
+                        Jugadores a Calificar por Posición Ala Pivot
+                    </thead>
+                    
+                    <tr>
+                        <th class="th-nombre">Nombre</th>
+                        <th class="th-apellido">Apellido</th>
+                        <th class="th-posicion">Posición</th>
+                        <th class="th-cali">Calificación</th>
+                    </tr>
+                
+                       <template is="dom-repeat" id="lista" items={{seleccionAlaPivot}} as="item">
+                        <tr>
+                        <td class="td-nombre">{{item.nombre}}</td>
+                        <td class="td-apellido">{{item.apellido}}</td>
+                        <td class="td-posicion">{{item.posicion}}</td>
+                        <td class="td-cali"> <input class="input-cali" type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}></td>
+                        </tr>
+                        </template>
+                    </table>
+                
+          
+       
+          
+       <br> <button class="btn-calificacion" on-click="cargarCalificacion">Cargar Calificaciones</button>
+
+        <table style="width:100%" border="1">
+            <caption>Selección de Equipos</caption>
+            <template is="dom-repeat" id="lista" items={{jugadorSeleccionado}} as="item">
+           <tr>
+           <th>Ficha Técnica</th>
+           <th colspan="3">{{item.nombre}} {{item.apellido}}</th>
+           
+           </tr>
+           
+           <tr>
+           <td rowspan="5"><img src="/assets/usuario..png"width="160" height="160" ></td>
+           <td>Edad:</td>
+           <td>{{item.edad}}</td>
+           
+           </tr>
+           
+           <tr>
+           <td>Peso</td>
+           <td>{{item.peso}}</td>
+           </tr>
+           
+           <tr>
+           <td>Altura</td>
+           <td>{{item.altura}}</td>
+           </tr>
+           <tr>
+           <td>Posición</td>
+           <td>{{item.posicion}}</td>
+           </tr>
+           <tr>
+           <td>Calificación</td>
+           <td>{{item.calificacion}}</td>
+           </tr>
+        </template>
+           </table>
+           
+
 </div>
 
 
@@ -79,12 +205,41 @@
        
             }
 
+            .table-base{
+    table-layout: fixed;
+    width: 250px;
+}
+
+.th-titulo{
+    width: 50%;
+}
+
+.th-nombre, .th-apellido, .th-cali, .th-posicion, .td-nombre, .td-apellido, .td-posicion, .td-cali {
+    
+    width: 100px;
+    word-wrap: break-word;
+    padding: 1px;
+}
+
+            .td-cali{
+                text-align:center;
+            }
+
+        .td-nombre{
+            text-align: center;
+        }
+
+            
+
+
 .tabla-jugadores, .tr, .th{
   
   border: 1px solid black;
 
 
 }
+
+
 
 .panel-principal{
     margin: auto;
@@ -116,9 +271,19 @@
         border-radius: 10px; 
         margin-bottom:20px; 
         width:100%;
-     
             }
 
+.input-cali{
+            border: solid 1px #ccc; 
+         padding: 2px;
+         font-size: 15px;
+         font-family: 'Cantarell', sans-serif;
+        margin: 0 auto;
+        color:black;
+        border-radius: 10px; 
+        margin-bottom:10px; 
+        width:50%;
+}
             #posicion{
                 border: solid 1px #ccc; 
          padding: 10px;
@@ -132,7 +297,7 @@
      
             }
 
-        .btn-registrar, .btn-mostrar{
+        .btn-registrar, .btn-mostrar, .btn-calificacion{
         padding:10px;
         border: solid 1px #ccc; 
         margin-bottom:10px;
@@ -142,6 +307,13 @@
         font-family: 'Cantarell', sans-serif;
             }
 
+            .btn-calificacion{
+        padding:10px;
+        border: solid 1px #ccc; 
+        width:50%;
+        border-radius: 10px; 
+        font-family: 'Cantarell', sans-serif;
+            }
             .lb-nombre, .lb-apellido, .lb-edad, .lb-peso, .lb-altura, .lb-posicion{
             padding:20px;
             margin-top: -24px;
@@ -171,6 +343,7 @@
             font-family: 'Cantarell', sans-serif;
 
             }
+
             </style>
         
     </template>
@@ -279,7 +452,7 @@ registrarJugador(){
         calificacion:0
     }
 
-if(this.jugadorCargado.length<5){
+if(this.jugadorCargado.length<25){
 
 this.push('jugadorCargado', listaAuxiliar); 
 contadorId=contadorId+1;
@@ -306,7 +479,7 @@ mostrar(){
     }
 
         this.jugadorCargado.forEach(element => {
-            if((element.posicion=='base')&&(this.seleccionBase.length<5)){
+            if((element.posicion=='Base')&&(this.seleccionBase.length<5)){
                 this.push('seleccionBase', element);
 
                 }
@@ -316,7 +489,7 @@ mostrar(){
         console.log(this.seleccionBase);
 
         this.jugadorCargado.forEach(element => {
-            if((element.posicion=='ala')&&(this.seleccionAla.length<5)){
+            if((element.posicion=='Ala')&&(this.seleccionAla.length<5)){
                 this.push('seleccionAla', element);
             }
         });
@@ -325,7 +498,7 @@ mostrar(){
         console.log(this.seleccionAla);
 
         this.jugadorCargado.forEach(element => {
-            if((element.posicion=='ala pivot')&&(this.seleccionAlaPivot.length<5)){
+            if((element.posicion=='Ala Pivot')&&(this.seleccionAlaPivot.length<5)){
                 this.push('seleccionAlaPivot', element);
             }
         });
@@ -334,7 +507,7 @@ mostrar(){
     console.log(this.seleccionAlaPivot);
 
         this.jugadorCargado.forEach(element => {
-            if((element.posicion=='ayuda base')&&(this.seleccionAyudaBase.length<5)){
+            if((element.posicion=='Ayuda Base')&&(this.seleccionAyudaBase.length<5)){
                 this.push('seleccionAyudaBase', element);
             }
         });
@@ -344,7 +517,7 @@ mostrar(){
 
    
         this.jugadorCargado.forEach(element => {
-            if((element.posicion=='pivot')&&(this.seleccionPivot.length<5)){
+            if((element.posicion=='Pivot')&&(this.seleccionPivot.length<5)){
                 this.push('seleccionPivot', element);
             }
         });
