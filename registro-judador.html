@@ -3,7 +3,7 @@
 <dom-module id="registro-jugador"> 
 
     <template>
-
+<div class=panel-principal>
     <div class="botones">
         <h1 class="lb-titulo">Datos del Jugador</h1>
         <label class="lb-nombre">Nombre:</label><input class="input-nombre" type=text id="nombre" value="{{nombre::input}}">
@@ -23,34 +23,75 @@
        
        <br> <button class="btn-registrar" on-click="registrarJugador">Cargar Datos </button>
        <br> <button class="btn-mostrar" on-click="mostrar">Cargar Datos para Calificaciones</button>
-    </div>
-       
-     <div class="segundo-div">
-       
-        <button class="btn-mostrar" on-click="mostrarJson">mostrar</button>
-             
-
-    </div> 
-    <div class="tercer-div">
     
-           
+       <button class="btn-mostrar" on-click="mostrarJson">mostrar</button>
+    </div>
+        
+
+    <div class="panel-secundario">
+
        <template is="dom-repeat" id="lista" items={{seleccionBase}} as="item">
       <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="seleccion" id="{{item.nombre}}" value={{calificacion::input}}>
         </template>
+
+        <template is="dom-repeat" id="lista" items={{seleccionAla}} as="item">
+            <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="seleccion" id="{{item.nombre}}" value={{calificacion::input}}>
+              </template>
+
+            <template is="dom-repeat" id="lista" items={{seleccionPivot}} as="item">
+                <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="seleccion" id="{{item.nombre}}" value={{calificacion::input}}>
+                  </template>
       
        
+                  <template is="dom-repeat" id="lista" items={{seleccionAyudaBase}} as="item">
+                    <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="seleccion" id="{{item.nombre}}" value={{calificacion::input}}>
+                      </template>
+
+                      <template is="dom-repeat" id="lista" items={{seleccionAlaPivot}} as="item">
+                        <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="seleccion" id="{{item.nombre}}" value={{calificacion::input}}>
+                          </template>
+          
         <button on-click="cargarCalificacion">Cargar Calificaciones</button>
-    </div>
+
+
+
+</div>
+</div>
+
 
         <style>
     
-            .panel-registro{
-        width: 300px;
+            .botones {
         margin: 0 auto;
-        padding: 10px;
+        width: 500px;
+        height: 500px;
+        padding: 30px;
         color:#999;
         border-radius: 4px;
+        float:left;
+        margin-left: 10px;
+       
+            }
+
+
+.panel-principal{
+    margin: auto;
+    width: 1200px;
+    height: 900px;
+}
+            .panel-secundario{
+
+        margin: 0 auto;
+        width: 600px;
+        height: 300px;
+        padding: 10px;
+        color:aliceblue;
+        border-radius: 4px;
+        font-family: 'Cantarell', sans-serif;
+        float: left;
+        margin-left: 40px;
         
+                
             }
 
         .input-nombre, .input-edad, .input-altura, .input-peso, .input-apellido, .input-cat{
@@ -108,7 +149,7 @@
             }
 
 
-            .botones, .segundo-div{
+            .botones{
                 width: 500px;
              margin:auto;
             margin-top: 20px;
@@ -202,11 +243,13 @@ class RegistroJugador extends Polymer.Element{
                     }
                     }
 
+    }
+
     };
 
 
 
-}
+
 
 registrarJugador(){
     let listaAuxiliar={
@@ -306,18 +349,37 @@ console.log(this.seleccionBase);
         localStorage.setItem("listaBase", listaJson);
 
             console.log(listaJson);
+
+            var nuevo=JSON.parse(localStorage.getItem("listaBase"));
+            console.log(nuevo);
+            
+            const resultado = nuevo.find(seleccion=>seleccion.nombre=='pepito');
+
+            console.log(resultado);
         }
         
     
-        cargarCalificacion(nombre, calificacion){
+        cargarCalificacion(){
             var listaJson= JSON.stringify(this.seleccionBase);
             localStorage.setItem("listaBase", listaJson);
-            let nuevo=JSON.parse(localStorage.getItem("listaBase"));
+            
+            
 
-            let referenciaInput= document.getElementsByName("seleccion").value;
-            console.log(referenciaInput)
-        console.log(this.calificacion)
+           // let referenciaInput= document.getElementsByName("seleccion").value;
+            //console.log(referenciaInput)
+        //console.log(this.calificacion)
+       
+   
+
+console.log(this.calificacion);
+       
         }
+
+        
+        toggleSelection(e) {
+        var item = this.$.seleccionBase.itemForElement(e.target);
+        this.$.selector.select(item);
+      }
 
 
     }
