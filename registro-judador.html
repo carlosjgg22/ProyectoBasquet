@@ -21,7 +21,7 @@
             <option value="Pivot">Pivot</option>
        </select>
        
-       <br> <button class="btn-registrar" on-click="registrarJugador">Cargar Datos </button>
+       <br> <button class="btn-registrar" on-click="registrarJugador">Cargar Datos del Jugador</button>
        <br> <button class="btn-mostrar" on-click="mostrar">Cargar Datos para Calificaciones</button>
     
        <button class="btn-mostrar" on-click="sortCalification">Seleccionar Jugadores</button>
@@ -30,10 +30,10 @@
 
     <div class="panel-secundario">
 <table class="tabla-base">
-    <thead>
-        Jugadores a Calificar por Posición Base
-    </thead>
+   
+   <caption>     Jugadores a Calificar por Posición Base
     
+   </caption>
     <tr>
         <th class="th-nombre">Nombre</th>
         <th class="th-apellido">Apellido</th>
@@ -53,9 +53,9 @@
 
 
     <table class="tabla-ala">
-        <thead>
+        <caption>
             Jugadores a Calificar por Posición Ala
-        </thead>
+        </caption>
         
         <tr>
             <th class="th-nombre">Nombre</th>
@@ -76,9 +76,9 @@
     
 
         <table class="tabla-pivot">
-            <thead>
+            <caption>
                 Jugadores a Calificar por Posición Pivot
-            </thead>
+            </caption>
             
             <tr>
                 <th class="th-nombre">Nombre</th>
@@ -99,9 +99,9 @@
         
         
             <table class="tabla-ayudabase">
-                <thead>
+                <caption>
                     Jugadores a Calificar por Posición Ayuda Base
-                </thead>
+                </caption>
                 
                 <tr>
                     <th class="th-nombre">Nombre</th>
@@ -122,9 +122,9 @@
             
       
                 <table class="tabla-ayudabase">
-                    <thead>
+                    <caption>
                         Jugadores a Calificar por Posición Ala Pivot
-                    </thead>
+                    </caption>
                     
                     <tr>
                         <th class="th-nombre">Nombre</th>
@@ -148,12 +148,12 @@
           
        <br> <button class="btn-calificacion" on-click="cargarCalificacion">Cargar Calificaciones</button>
 
-        <table style="width:100%" border="1">
+        <table style="width:100%" border="1"class="tabla-seleccion" >
             <caption>Selección de Equipos</caption>
             <template is="dom-repeat" id="lista" items={{jugadorSeleccionado}} as="item">
            <tr>
            <th>Ficha Técnica</th>
-           <th colspan="3">{{item.nombre}} {{item.apellido}}</th>
+           <th colspan="3">Id:#{{item.id}}  {{item.nombre}} {{item.apellido}}</th>
            
            </tr>
            
@@ -210,6 +210,10 @@
     width: 250px;
 }
 
+.tabla-seleccion {
+  background-color: #A56A35;
+  color: white;
+}
 .th-titulo{
     width: 50%;
 }
