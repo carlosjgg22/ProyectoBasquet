@@ -29,9 +29,9 @@
         
 
     <div class="panel-secundario">
-
+<p>Lista de Jugadores por Asignar Calificacion</p>
        <template is="dom-repeat" id="lista" items={{seleccionBase}} as="item">
-      <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="seleccion" id="{{item.id}}" value={{item.calificacion::input}}>
+      <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
         </template>
 
         <template is="dom-repeat" id="lista" items={{seleccionAla}} as="item">
@@ -39,16 +39,16 @@
               </template>
 
             <template is="dom-repeat" id="lista" items={{seleccionPivot}} as="item">
-                <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.nombre}}" value={{item.calificacion::input}}>
+                <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
                   </template>
       
        
                   <template is="dom-repeat" id="lista" items={{seleccionAyudaBase}} as="item">
-                    <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="seleccion" id="{{item.id}}" value={{item.calificacion::input}}>
+                    <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
                       </template>
 
                       <template is="dom-repeat" id="lista" items={{seleccionAlaPivot}} as="item">
-                        <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="seleccion" id="{{item.id}}" value={{item.calificacion::input}}>
+                        <br> {{item.nombre}} {{item.apellido}} Peso: {{item.peso}} Poscición {{item.posicion}}  Calificación:<input type="number" placeholder="000"  name="{{item.id}}" id="{{item.id}}" value={{item.calificacion::input}}>
                           </template>
           
         <button on-click="cargarCalificacion">Cargar Calificaciones</button>
@@ -268,6 +268,7 @@ registrarJugador(){
     }
 
 if(this.jugadorCargado.length<10){
+
 this.push('jugadorCargado', listaAuxiliar); 
 contadorId=contadorId+1;
 alert("Jugador cargado exitosamente")
@@ -293,7 +294,7 @@ mostrar(){
     }
 
         this.jugadorCargado.forEach(element => {
-            if(element.posicion=='base'&&this.seleccionBase.length<5){
+            if((element.posicion=='base')&&(this.seleccionBase.length<5)){
                 this.push('seleccionBase', element);
 
                 }
@@ -303,7 +304,7 @@ mostrar(){
         console.log(this.seleccionBase);
 
         this.jugadorCargado.forEach(element => {
-            if(element.posicion=='ala'&&this.seleccionAla.length<5){
+            if((element.posicion=='ala')&&(this.seleccionAla.length<5)){
                 this.push('seleccionAla', element);
             }
         });
@@ -312,7 +313,7 @@ mostrar(){
         console.log(this.seleccionAla);
 
         this.jugadorCargado.forEach(element => {
-            if(element.posicion=='ala pivot'&&this.seleccionAlaPivot<5){
+            if((element.posicion=='ala pivot')&&(this.seleccionAlaPivot<5)){
                 this.push('seleccionAlaPivot', element);
             }
         });
@@ -321,7 +322,7 @@ mostrar(){
     console.log(this.seleccionAlaPivot);
 
         this.jugadorCargado.forEach(element => {
-            if(element.posicion=='ayuda base'&&this.seleccionAyudaBase<5){
+            if((element.posicion=='ayuda base')&&(this.seleccionAyudaBase<5)){
                 this.push('seleccionAyudaBase', element);
             }
         });
@@ -331,7 +332,7 @@ mostrar(){
 
    
         this.jugadorCargado.forEach(element => {
-            if(element.posicion=='pivot'&&this.seleccionPivot<5){
+            if((element.posicion=='pivot')&&(this.seleccionPivot<5)){
                 this.push('seleccionPivot', element);
             }
         });
